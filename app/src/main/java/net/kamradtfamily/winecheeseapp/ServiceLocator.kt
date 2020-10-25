@@ -19,7 +19,7 @@ interface ServiceLocator {
         }
     }
 
-    fun getRepository(type: WineCheesePostRepository.Type): WineCheesePostRepository
+    fun getRepository(): WineCheesePostRepository
 
     fun getWineCheeseApi(): WineCheeseApi
 }
@@ -36,19 +36,9 @@ open class DefaultServiceLocator(val app: Application, val useInMemoryDb: Boolea
         WineCheeseApi.create()
     }
 
-    override fun getRepository(type: WineCheesePostRepository.Type): WineCheesePostRepository {
-        return when (type) {
-            WineCheesePostRepository.Type.IN_MEMORY_BY_ITEM -> InMemoryByItemRepository(
-                wineCheeseApi = getWineCheeseApi()
-            )
-            WineCheesePostRepository.Type.IN_MEMORY_BY_PAGE -> InMemoryByPageKeyRepository(
-                wineCheeseApi = getWineCheeseApi()
-            )
-            WineCheesePostRepository.Type.DB -> DbWineCheesePostRepository(
-                db = db,
-                wineCheeseApi = getWineCheeseApi()
-            )
-        }
+    override fun getRepository(): WineCheesePostRepository {
+        return InMemoryByItemRepository(
+                wineCheeseApi = getWineCheeseApi())
     }
 
     override fun getWineCheeseApi(): WineCheeseApi = api

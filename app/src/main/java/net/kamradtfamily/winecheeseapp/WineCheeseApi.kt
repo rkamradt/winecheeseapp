@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 
 interface WineCheeseApi {
-    @GET("/r/{subreddit}/hot.json")
+    @GET("/api/{id}")
     suspend fun getTop(
             @Path("id") id: Int,
             @Query("limit") limit: Int,
@@ -31,7 +31,7 @@ interface WineCheeseApi {
     data class WineCheeseChildrenResponse(val data: WineCheesePost)
 
     companion object {
-        private const val BASE_URL = "https://www.reddit.com/"
+        private const val BASE_URL = "https://phprest.kamradtfamily.net/"
         fun create(): WineCheeseApi {
             val logger = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Log.d("API", it) })
             logger.level = HttpLoggingInterceptor.Level.BASIC

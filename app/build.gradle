@@ -57,4 +57,5 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.okhttp_logging_interceptor
+    implementation deps.glide.runtime
 }
